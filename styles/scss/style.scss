@@ -1,0 +1,252 @@
+@use "variables" as var;
+@use "mixins" as mix;
+
+* {
+  @include mix.reset;
+}
+
+body {
+  background-color: var.$bg-color;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background-color: var.$primary-color;
+
+  h1 {
+    @include mix.text-style(1.3rem, bold, var.$secondary-color);
+  }
+}
+
+.hamburger-menu {
+  display: none;
+
+  span {
+    display: block;
+    height: 3px;
+    width: 20px;
+    border-radius: 5px;
+    margin: 2px;
+    background-color: var.$secondary-color;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 40px;
+    border-radius: 50%;
+  }
+  nav {
+    margin-right: 40px;
+  }
+  ul {
+    display: flex;
+  }
+  a {
+    padding: 8px;
+    text-decoration: none;
+    @include mix.text-style(1rem, bold, var.$secondary-color);
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      color: var.$text-color;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  margin: 2rem 3rem;
+
+  aside {
+    @include mix.body-style;
+    @include mix.box-style;
+    flex-direction: column;
+    width: 25%;
+    margin-right: 25px;
+
+    div {
+      background-color: var.$primary-color;
+      width: 100%;
+      height: 110px;
+      margin: 20px 10px;
+      text-align: center;
+      line-height: 110px;
+      color: var.$secondary-color;
+      @include mix.text-style(1rem, bold, var.$secondary-color);
+      @include mix.box-style;
+    }
+    .js {
+      background: url("/assets/images/js.png");
+      @include mix.bg-set;
+    }
+    .react {
+      background: url("/assets/images/react.png");
+      @include mix.bg-set;
+    }
+    .html {
+      background: url("/assets/images/html-css.jpg");
+      @include mix.bg-set;
+      color: var.$text-color;
+    }
+    .sass {
+      background: url("/assets/images/sass.png");
+      @include mix.bg-set;
+      color: var.$text-color;
+    }
+  }
+
+  main {
+    width: 75%;
+    @include mix.body-style;
+    @include mix.box-style;
+    flex-direction: column;
+
+    img {
+      @include mix.box-style;
+      width: 200px;
+    }
+    h2 {
+      @include mix.text-style(4rem, bold, var.$primary-color);
+      @include mix.text-gradient;
+      margin: 2rem 0 3rem;
+    }
+    p {
+      @include mix.text-style(2rem, bold, var.$text-color);
+      @include mix.text-gradient;
+    }
+  }
+}
+
+.cards {
+  width: calc(100% - 6rem);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 20px 0;
+  overflow-x: scroll;
+}
+
+.card {
+  @include mix.box-style;
+
+  img {
+    width: 100%;
+  }
+
+  .card-content {
+    line-height: 1.5rem;
+    padding: 15px;
+    background-color: var.$secondary-color;
+
+    p {
+      margin: 10px 0;
+      @include mix.text-style(1.1rem, 100, var.$text-color);
+    }
+
+    span {
+      display: inline-block;
+      margin: 10px 0;
+      @include mix.text-style(0.9rem, bold, var.$primary-color);
+    }
+  }
+}
+
+footer {
+  display: flex;
+  padding: 2rem 3rem;
+  margin-top: 30px;
+  background-color: var.$primary-color;
+
+  .summary {
+    width: 50%;
+
+    p {
+      text-align: center;
+      @include mix.text-style(1.2rem, 100, var.$secondary-color);
+    }
+  }
+
+  .links {
+    padding: 0 5rem;
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      @include mix.text-style(1.2rem, bold, var.$secondary-color);
+      margin-bottom: 10px;
+      transition: all 0.15s ease-in-out;
+
+      &:hover {
+        color: var.$text-color;
+      }
+    }
+  }
+}
+
+//? Responsive
+
+@include mix.media(M) {
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    color: green;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .main {
+    flex-direction: column-reverse;
+    margin: 1rem;
+
+    main {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 1.6rem;
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    aside {
+      width: 100%;
+      height: 600px;
+    }
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+
+  footer {
+    flex-direction: column;
+
+    .summary {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .links {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+@include mix.media(L) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+  }
+}
